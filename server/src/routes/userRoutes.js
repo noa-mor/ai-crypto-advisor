@@ -5,6 +5,6 @@ const User = require("../models/UserModel");
 const validateModel = require("../middleware/validateModelMiddleware").default;
 
 router.get("/", userController.getAllUsers);
-router.post("/", validateModel(User), userController.createUser);
+router.post("/register", validateModel(User), userController.createUser);
 
 module.exports = router;
