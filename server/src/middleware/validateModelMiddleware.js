@@ -10,10 +10,15 @@ const validateModel = (Model) => async (req, res, next) => {
 
     if (err.errors) {
       Object.keys(err.errors).forEach((key) => {
-        errors[key] = err.errors[key].message;
+        if (!key.includes("Id")) errors[key] = err.errors[key].message;
       });
     } else {
       errors.general = err.message;
+    }
+
+    if (Object.keys(errors).length === 0) {
+      next();
+      return;
     }
 
     res.status(400).json({
