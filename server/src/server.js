@@ -4,6 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const userRoutes = require("./routes/userRoutes");
 const preferenceRoutes = require("./routes/preferenceRoutes");
+const voteRoutes = require("./routes/voteRoutes");
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/users", userRoutes);
 app.use("/preferences", preferenceRoutes);
+app.use("/votes", voteRoutes);
 
 mongoose
   .connect(process.env.MONGO_URI, {
