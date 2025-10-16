@@ -10,6 +10,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Email is required'],
     unique: true,
+    lowercase: true,
+    trim: true,
     match: [
       /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
       'Please fill a valid email address',
@@ -17,7 +19,7 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: true,
+    required: [true, 'Password is required'],
     validate: {
       validator: function(password) {
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*(),.?":{}|<>])[^\s]{8,}$/;
@@ -26,9 +28,19 @@ const userSchema = new mongoose.Schema({
       message:
         'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one special character, and cannot contain spaces',
     },
-  }
-}, {
-  timestamps: true
-});
+  },
+  preference: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Preference'
+  },
+  votes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Vote',
+    },
+  ],
+},
+  { timestamps: true }
+);
 
 module.exports = mongoose.model('User', userSchema);
