@@ -18,7 +18,7 @@ const getPreferencesByUser = async (req, res, next) => {
 };
 
 const addPreference = async (req, res, next) => {
-  const userId = req.user;
+  const userId = req.user._id;
 
   try {
     const newPreference = await preferenceService.addPreference({

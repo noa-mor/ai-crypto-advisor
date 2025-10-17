@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const autopopulate = require("mongoose-autopopulate");
 
 const preferenceSchema = new mongoose.Schema(
   {
@@ -6,6 +7,7 @@ const preferenceSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+      autopopulate: true,
     },
     assets: {
       type: [String],
@@ -25,7 +27,7 @@ const preferenceSchema = new mongoose.Schema(
     },
     contentTypes: {
       type: [String],
-      enum: ["Market News", "Charts", "Social", "Fun"],
+      enum: ["news", "charts", "social", "fun"],
       required: true,
       validate: {
         validator: function (arr) {
@@ -37,5 +39,6 @@ const preferenceSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+preferenceSchema.plugin(autopopulate);
 
 module.exports = mongoose.model("Preference", preferenceSchema);

@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const autopopulate = require("mongoose-autopopulate");
 
 const voteSchema = new mongoose.Schema(
   {
@@ -6,17 +7,18 @@ const voteSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+      autopopulate: true,
     },
     type: {
       type: String,
-      enum: ["Market News", "Charts", "Social", "Fun"],
+      enum: ["news", "charts", "social", "fun"],
       required: [true, "Type is required"],
     },
-    itemTitle: {
+    itemId: {
       type: String,
       required: true,
       trim: true,
-      unique: [true, "Item title is required"],
+      unique: [true, "Item id is required"],
     },
     value: {
       type: Number,
@@ -26,5 +28,6 @@ const voteSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+voteSchema.plugin(autopopulate);
 
 module.exports = mongoose.model("Vote", voteSchema);

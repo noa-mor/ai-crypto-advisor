@@ -1,22 +1,29 @@
 const Vote = require("../models/VoteModel");
+const userRepository = require("./userRepository");
 
 const getVotesByUser = async (userId) => {
   return await Vote.find(
     { userId },
-    { _id: 0, type: 1, itemTitle: 1, value: 1 }
+    { userId: 0, type: 1, itemId: 1, value: 1 }
   );
 };
 
-const getVotesByUserAndItemTitle = async (userId, itemTitle) => {
-  return await Vote.find({ userId, itemTitle }, { _id: 0 });
+const getVotesByUserAndItemId = async (userId, itemId) => {
+  return await Vote.find({ userId, itemId }, { _id: 0 });
 };
 
 const addVote = async (vote) => {
-  return await Vote.create(vote);
+  const newVote = await Vote.create(vote);
+
+  await userRepository.findByIdAndUpdate(vote.userId, {
+    $push: { votes: newVote._id },
+  });
+
+  return newVote;
 };
 
 module.exports = {
-  getVotesByUserAndItemTitle,
+  getVotesByUserAndItemId,
   getVotesByUser,
   addVote,
 };

@@ -18,9 +18,7 @@ const addPreference = async (preference) => {
     throw new Error("Preference already exists for this user");
   }
 
-  await preferenceRepository.addPreference(preference);
-
-  return await preferenceRepository.getPreferencesByUser(preference.userId);
+  return await preferenceRepository.addPreference(preference);
 };
 
 module.exports = {

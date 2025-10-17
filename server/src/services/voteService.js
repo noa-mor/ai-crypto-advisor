@@ -7,12 +7,18 @@ const getVotesByUser = async (userId) => {
   return await voteRepository.getVotesByUser(userId);
 };
 
+const getVoteByUserAndItemId = async (userId, itemId) => {
+  log(`Fetching votes for user: ${userId} and itemId: ${itemId}`);
+
+  return await voteRepository.getVotesByUserAndItemId(userId, itemId);
+};
+
 const addVote = async (vote) => {
   log(`Adding vote for user: ${vote.userId}`);
 
-  const existing = await voteRepository.getVotesByUserAndItemTitle(
+  const existing = await voteRepository.getVotesByUserAndItemId(
     vote.userId,
-    vote.itemTitle
+    vote.itemId
   );
 
   if (Array.isArray(existing) && existing.length) {
@@ -23,6 +29,7 @@ const addVote = async (vote) => {
 };
 
 module.exports = {
+  getVoteByUserAndItemId,
   getVotesByUser,
   addVote,
 };

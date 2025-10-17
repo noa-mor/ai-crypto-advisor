@@ -14,7 +14,7 @@ const getVotesByUser = async (req, res, next) => {
 };
 
 const addVote = async (req, res, next) => {
-  const userId = req.user;
+  const userId = req.user._id;
 
   try {
     const newVote = await voteService.addVote({
