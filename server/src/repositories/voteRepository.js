@@ -4,7 +4,7 @@ const userRepository = require("./userRepository");
 const getVotesByUser = async (userId) => {
   return await Vote.find(
     { userId },
-    { userId: 0, type: 1, itemId: 1, value: 1 }
+    { userId: 0, type: 1, itemId: 1, itemTitle: 1, value: 1 }
   );
 };
 

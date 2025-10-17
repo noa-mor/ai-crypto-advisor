@@ -16,9 +16,13 @@ const voteSchema = new mongoose.Schema(
     },
     itemId: {
       type: String,
-      required: true,
+      required: [true, "Item id is required"],
       trim: true,
-      unique: [true, "Item id is required"],
+    },
+    itemTitle: {
+      type: String,
+      required: [true, "Item title is required"],
+      trim: true,
     },
     value: {
       type: Number,
@@ -29,5 +33,6 @@ const voteSchema = new mongoose.Schema(
   { timestamps: true }
 );
 voteSchema.plugin(autopopulate);
+voteSchema.index({ userId: 1, itemId: 1 }, { unique: true });
 
 module.exports = mongoose.model("Vote", voteSchema);
