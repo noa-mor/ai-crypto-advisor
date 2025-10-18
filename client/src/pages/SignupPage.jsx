@@ -30,7 +30,11 @@ export default function SignupPage() {
       await registerApi({ name, email, password });
       navigate("/login");
     } catch (err) {
-      setError(err.response?.data?.message || "Signup failed. Please try again.");
+      setError(
+        err.response?.data?.errors?.password ||
+          err.response?.data ||
+          "Signup failed. Please try again."
+      );
       setLoading(false);
     }
   };
@@ -39,7 +43,9 @@ export default function SignupPage() {
     <div className="min-h-screen bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">Create Account</h1>
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            Create Account
+          </h1>
           <p className="text-gray-600">Join Crypto Advisor today</p>
         </div>
 
@@ -51,7 +57,9 @@ export default function SignupPage() {
           )}
 
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">Name</label>
+            <label className="block text-gray-700 font-semibold mb-2">
+              Name
+            </label>
             <input
               type="text"
               value={name}
@@ -63,7 +71,9 @@ export default function SignupPage() {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">Email</label>
+            <label className="block text-gray-700 font-semibold mb-2">
+              Email
+            </label>
             <input
               type="email"
               value={email}
@@ -75,7 +85,9 @@ export default function SignupPage() {
           </div>
 
           <div>
-            <label className="block text-gray-700 font-semibold mb-2">Password</label>
+            <label className="block text-gray-700 font-semibold mb-2">
+              Password
+            </label>
             <input
               type="password"
               value={password}

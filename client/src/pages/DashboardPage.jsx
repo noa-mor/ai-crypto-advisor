@@ -195,14 +195,17 @@ export default function DashboardPage() {
           onEnable={() => handleEnableSection(sectionType)}
           loading={enablingSection === sectionType}
         />
-      ) : isLoading ? (
-        <div className="flex justify-center py-8">
-          <LoadingSpinner size="md" />
-        </div>
       ) : isEmpty ? (
         <div className="text-gray-500 text-center py-8">No content available</div>
       ) : (
-        <div className="space-y-4">{children}</div>
+        <div className="relative">
+          <div className="space-y-4">{children}</div>
+          {isLoading && (
+            <div className="absolute inset-0 bg-white bg-opacity-80 flex items-center justify-center z-10 rounded-lg">
+              <LoadingSpinner size="lg" />
+            </div>
+          )}
+        </div>
       )}
     </div>
   );
