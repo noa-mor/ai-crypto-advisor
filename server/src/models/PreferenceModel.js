@@ -11,7 +11,7 @@ const preferenceSchema = new mongoose.Schema(
     },
     assets: {
       type: [String],
-      enum: ["BTC", "ETH"],
+      enum: ["BTC", "ETH", "SOL", "DOGE", "XRP", "ADA", "DOT", "MATIC"],
       required: true,
       validate: {
         validator: function (arr) {

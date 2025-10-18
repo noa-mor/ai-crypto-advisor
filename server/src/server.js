@@ -6,6 +6,7 @@ const userRoutes = require("./routes/userRoutes");
 const preferenceRoutes = require("./routes/preferenceRoutes");
 const voteRoutes = require("./routes/voteRoutes");
 const dataRoutes = require("./routes/dataRoutes");
+const healthRoute = require("./routes/healthRoute");
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(cors());
 
 app.use(express.json());
 
+app.use("/api", healthRoute);
 app.use("/users", userRoutes);
 app.use("/preferences", preferenceRoutes);
 app.use("/votes", voteRoutes);

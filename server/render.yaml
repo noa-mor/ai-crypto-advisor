@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: crypto-advisor-api
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGO_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        sync: false
+      - key: CRYPTOPANIC_TOKEN
+        sync: false
+      - key: HUGGING_FACE_TOKEN
+        sync: false
+    autoDeploy: true

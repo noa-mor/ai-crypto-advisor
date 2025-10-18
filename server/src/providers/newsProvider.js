@@ -1,6 +1,11 @@
 const url = "https://cryptopanic.com/api/developer/v2/posts/";
 
 const newsProvider = async (user) => {
+  if (!user.preference || !user.preference.assets || user.preference.assets.length === 0) {
+    console.log('[News Provider] No user preferences found, returning mock data');
+    return mockData;
+  }
+
   const params = {
     auth_token: process.env.CRYPTOPANIC_TOKEN,
     public: "true",
