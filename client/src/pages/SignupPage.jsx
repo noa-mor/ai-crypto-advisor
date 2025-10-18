@@ -91,7 +91,6 @@ export default function SignupPage() {
               className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none transition-colors"
               disabled={loading}
             />
-            <p className="text-sm text-gray-500 mt-1">Minimum 6 characters</p>
           </div>
 
           <button
