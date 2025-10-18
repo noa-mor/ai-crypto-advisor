@@ -100,23 +100,27 @@ export default function ContentCard({ item, type, onVote }) {
           onClick={() => handleVote(1)}
           disabled={voting || hasVoted}
           className={`flex-1 py-2 px-4 rounded-lg transition-all duration-200 ${
-            hasVoted
+            voting
+              ? 'bg-gray-100 text-gray-600 cursor-not-allowed opacity-75'
+              : hasVoted
               ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
               : 'bg-green-100 text-green-700 hover:bg-green-200'
           }`}
         >
-          👍 {hasVoted ? 'Voted' : 'Like'}
+          {voting ? '⏳ Voting...' : hasVoted ? '👍 Voted' : '👍 Like'}
         </button>
         <button
           onClick={() => handleVote(-1)}
           disabled={voting || hasVoted}
           className={`flex-1 py-2 px-4 rounded-lg transition-all duration-200 ${
-            hasVoted
+            voting
+              ? 'bg-gray-100 text-gray-600 cursor-not-allowed opacity-75'
+              : hasVoted
               ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
               : 'bg-red-100 text-red-700 hover:bg-red-200'
           }`}
         >
-          👎 {hasVoted ? 'Voted' : 'Dislike'}
+          {voting ? '⏳ Voting...' : hasVoted ? '👎 Voted' : '👎 Dislike'}
         </button>
       </div>
     </div>
